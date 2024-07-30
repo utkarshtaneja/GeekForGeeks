@@ -27,17 +27,17 @@ class GfG
 
 class Solution
 {   
-    public static boolean[][] isSubsetSum(int N, int arr[], int sum){
-        boolean[][] dp = new boolean[N + 1][sum + 1];
+    public static boolean[][] isSubsetSum(int n, int arr[], int sum){
+        boolean[][] dp = new boolean[n + 1][sum + 1];
         
-        for(int i = 0;i <= N;i++){
+        for(int i = 0;i <= n;i++){
             for(int j = 0;j <= sum;j++){
                 if(i == 0) dp[i][j] = false;
                 if(j == 0) dp[i][j] = true;
             }
         }
         
-        for(int i = 1;i <= N;i++){
+        for(int i = 1;i <= n;i++){
             for(int j = 1;j <= sum;j++){
                 if(arr[i - 1] <= j){
                     dp[i][j] = dp[i - 1][j - arr[i - 1]] || dp[i - 1][j];
@@ -47,6 +47,7 @@ class Solution
                 }
             }
         }
+        
         return dp;
     }
 
@@ -54,27 +55,27 @@ class Solution
 	{ 
 	    // Your code goes here
 	    int sum = 0;
-	    
 	    for(int i = 0;i < n;i++){
 	        sum += arr[i];
 	    }
 	    
+	    int range = sum;
+	    
 	    boolean[][] dp = isSubsetSum(n, arr, sum);
+	    int target = sum / 2; 
 	    
-	    int target = sum / 2;
-	    int maxSubsetSum = 0;
+	    int max = 0;
 	    
-	    for(int i = target; i >= 0; i--){
-            if(dp[n][i]){
-                maxSubsetSum = i;
-                break;
-            }
-        }
+	    for(int i = target;i >= 0;i--){
+	        if(dp[n][i]){
+	            max = i;
+	            break;
+	        }
+	    }
 	    
-	    int sum1 = maxSubsetSum;
-        int sum2 = sum - sum1;
-        
-        return Math.abs(sum2 - sum1);
+	    int S1 = max;
+	    int S2 = range - max;
 	    
+	    return Math.abs(S2 - S1);
 	} 
 }
