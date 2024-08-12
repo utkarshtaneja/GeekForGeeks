@@ -26,8 +26,8 @@ class GfG
 //User function Template for Java
 
 class Solution
-{   
-    public static boolean[][] isSubsetSum(int n, int arr[], int sum){
+{
+    public static boolean[][] SubsetSum(int[] arr, int n, int sum){
         boolean[][] dp = new boolean[n + 1][sum + 1];
         
         for(int i = 0;i <= n;i++){
@@ -47,22 +47,18 @@ class Solution
                 }
             }
         }
-        
         return dp;
     }
-
 	public int minDifference(int arr[], int n) 
 	{ 
 	    // Your code goes here
 	    int sum = 0;
-	    for(int i = 0;i < n;i++){
-	        sum += arr[i];
+	    for(int num : arr){
+	        sum += num;
 	    }
 	    
-	    int range = sum;
-	    
-	    boolean[][] dp = isSubsetSum(n, arr, sum);
-	    int target = sum / 2; 
+	    int target = sum / 2;
+	    boolean[][] dp = SubsetSum(arr, n, target);
 	    
 	    int max = 0;
 	    
@@ -74,7 +70,7 @@ class Solution
 	    }
 	    
 	    int S1 = max;
-	    int S2 = range - max;
+	    int S2 = sum - S1;
 	    
 	    return Math.abs(S2 - S1);
 	} 
