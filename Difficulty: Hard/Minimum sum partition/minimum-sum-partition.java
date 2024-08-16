@@ -47,6 +47,7 @@ class Solution
                 }
             }
         }
+        
         return dp;
     }
 	public int minDifference(int arr[], int n) 
@@ -57,8 +58,8 @@ class Solution
 	        sum += num;
 	    }
 	    
+	    boolean[][] dp = SubsetSum(arr, n, sum);
 	    int target = sum / 2;
-	    boolean[][] dp = SubsetSum(arr, n, target);
 	    
 	    int max = 0;
 	    
@@ -72,6 +73,6 @@ class Solution
 	    int S1 = max;
 	    int S2 = sum - S1;
 	    
-	    return Math.abs(S2 - S1);
+	    return Math.abs(S1 - S2);
 	} 
 }
