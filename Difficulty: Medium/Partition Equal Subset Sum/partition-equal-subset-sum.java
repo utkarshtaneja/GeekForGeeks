@@ -31,17 +31,17 @@ class GFG{
 // User function Template for Java
 
 class Solution{
-    public static boolean isSubsetSum(int N, int[] arr, int sum){
-        boolean[][] dp = new boolean[N + 1][sum + 1];
+    public static boolean SubsetSum(int[] arr, int n, int sum){
+        boolean[][] dp = new boolean[n + 1][sum + 1];
         
-        for(int i = 0;i <= N;i++){
+        for(int i = 0;i <= n;i++){
             for(int j = 0;j <= sum;j++){
                 if(i == 0) dp[i][j] = false;
                 if(j == 0) dp[i][j] = true;
             }
         }
         
-        for(int i = 1;i <= N;i++){
+        for(int i = 1;i <= n;i++){
             for(int j = 1;j <= sum;j++){
                 if(arr[i - 1] <= j){
                     dp[i][j] = dp[i - 1][j - arr[i - 1]] || dp[i - 1][j];
@@ -52,13 +52,11 @@ class Solution{
             }
         }
         
-        return dp[N][sum];
+        return dp[n][sum];
     }
     static int equalPartition(int N, int arr[])
     {
         // code here
-        
-        // Using Recursion
         int sum = 0;
         
         for(int num : arr){
@@ -66,6 +64,8 @@ class Solution{
         }
         
         if(sum % 2 != 0) return 0;
-        return isSubsetSum(N, arr, sum / 2) ? 1 : 0;
+        
+        int target = sum / 2;
+        return SubsetSum(arr, N, target) ? 1 : 0;
     }
 }
