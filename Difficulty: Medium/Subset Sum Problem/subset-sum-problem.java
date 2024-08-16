@@ -34,46 +34,20 @@ class GFG
 //User function Template for Java
 
 class Solution{
-    // Using Recursion
-    // public static void getAllPossibleSolutions(int index, int sum, int[] arr, List<Integer> subset){
-    //     if(index == arr.length){
-    //         subset.add(sum);
-    //         return;
-    //     }
-        
-    //     // pick
-    //     getAllPossibleSolutions(index + 1, sum + arr[index], arr, subset);
-        
-    //     // not pick
-    //     getAllPossibleSolutions(index + 1, sum, arr, subset);
-    // }
     static Boolean isSubsetSum(int N, int arr[], int sum){
         // code here
+        int n = N;
+        boolean[][] dp = new boolean[n + 1][sum + 1];
         
-        // Using Recursion
-        
-        // List<Integer> subset = new ArrayList<>();
-        // getAllPossibleSolutions(0, 0, arr, subset);
-        
-        // for(int val : subset){
-        //     if(val == sum){
-        //         return true;
-        //     }
-        // }
-        // return false;
-        
-        // Using Dp
-        boolean[][] dp = new boolean[N + 1][sum + 1];
-        
-        for(int i = 0;i <= N;i++){
+        for(int i = 0;i <= n;i++){
             for(int j = 0;j <= sum;j++){
                 if(i == 0) dp[i][j] = false;
                 if(j == 0) dp[i][j] = true;
             }
         }
         
-        for(int i = 1;i <= N;i++){
-            for(int j = 1;j <= sum;j++){
+        for(int i = 1;i <= n;i++){
+            for(int j = 1;j <=  sum;j++){
                 if(arr[i - 1] <= j){
                     dp[i][j] = dp[i - 1][j - arr[i - 1]] || dp[i - 1][j];
                 }
@@ -83,6 +57,6 @@ class Solution{
             }
         }
         
-        return dp[N][sum];
+        return dp[n][sum];
     }
 }
