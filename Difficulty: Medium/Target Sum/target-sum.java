@@ -32,25 +32,24 @@ class GFG {
 //User function Template for Java
 
 class Solution {
-    public static int countOfSubsetSum(int arr[],int n, int sum) { 
+    public static int isSubsetSum(int[] arr, int n, int sum){
+        int[][] dp = new int[n + 1][sum + 1];
         int mod = 1000000007;
         
-        int[][] dp = new int[n + 1][sum + 1];
-        
         for(int i = 0;i <= n;i++){
-	        for(int j = 0;j <= sum;j++){
-	            if(i == 0) dp[i][j] = 0;
-	            if(j == 0) dp[i][j] = 1;
-	        }
-	    }
+            for(int j = 0;j <= sum;j++){
+                if(i == 0) dp[i][j] = 0;
+                if(j == 0) dp[i][j] = 1;
+            }
+        }
         
         for(int i = 1;i <= n;i++){
             for(int j = 0;j <= sum;j++){
-                if(arr[i - 1] <= j){
-                    dp[i][j] = ( dp[i - 1][j] + dp[i - 1][j - arr[i - 1]] ) % mod;
+                if(arr[i -1] <= j){
+                    dp[i][j] = (dp[i - 1][j - arr[i - 1]] + dp[i - 1][j]) % mod;
                 }
                 else{
-                    dp[i][j] = ( dp[i - 1][j] ) % mod;
+                    dp[i][j] = (dp[i - 1][j]) % mod;
                 }
             }
         }
@@ -59,19 +58,19 @@ class Solution {
     }
     public static int countPartitions(int n, int d, int[] arr) {
         // code here
+        int sum = 0;
         
-        int sum = 0;;
-        for(int i = 0;i < n;i++){
-            sum += arr[i];
+        for(int num : arr){
+            sum += num;
         }
         
-        if( (d + sum) % 2 != 0) return 0;
+        if((d + sum) % 2 != 0) return 0;
         
         int target = (d + sum) / 2;
         
-        if (target < 0 || target > sum) return 0;
+        if(target < 0 || target > sum) return 0;
         
-        return countOfSubsetSum(arr, n, target);
+        return isSubsetSum(arr, n, target);
     }
     static int findTargetSumWays( int N, int[] A ,int target) {
         // code here
