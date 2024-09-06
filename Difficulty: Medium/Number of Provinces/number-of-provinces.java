@@ -35,25 +35,26 @@ class Solution {
     public static void dfs(int curr, boolean[] vis, ArrayList<ArrayList<Integer>> adj){
         vis[curr] = true;
         
-        for(int x : adj.get(curr)){
-            if(vis[x] == false){
-                dfs(x, vis, adj);
+        for(int val : adj.get(curr)){
+            if(!vis[val]){
+                dfs(val, vis, adj);
             }
         }
     }
     static int numProvinces(ArrayList<ArrayList<Integer>> adj, int V) {
         // code here
-        ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+        
+        ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
         
         for(int i = 0;i < V;i++){
-            list.add(new ArrayList<>());
+            graph.add(new ArrayList<>());
         }
         
         for(int i = 0;i < V;i++){
             for(int j = 0;j < V;j++){
                 if(adj.get(i).get(j) == 1 && i != j){
-                    list.get(i).add(j);
-                    list.get(j).add(i);
+                    graph.get(i).add(j);
+                    graph.get(j).add(i);
                 }
             }
         }
@@ -64,7 +65,7 @@ class Solution {
         for(int i = 0;i < V;i++){
             if(vis[i] == false){
                 count++;
-                dfs(i, vis, list);
+                dfs(i, vis, graph);
             }
         }
         
