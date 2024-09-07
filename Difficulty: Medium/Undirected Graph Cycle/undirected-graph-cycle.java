@@ -31,94 +31,57 @@ class GFG {
 }
 // } Driver Code Ends
 
-// Using BFS
-
-// class Solution {
-//     static class Pair{
-//         int src;
-//         int parent;
-        
-//         public Pair(int src, int parent){
-//             this.src = src;
-//             this.parent = parent;
-//         }
-//     }
-//     public static boolean check(int node, boolean[] vis, ArrayList<ArrayList<Integer>> adj, int V){
-//         vis[node] = true;
-        
-//         Queue<Pair> q = new LinkedList<>();
-//         q.add(new Pair(node, -1));
-        
-//         while(!q.isEmpty()){
-//             Pair curr = q.poll();
-//             int src = curr.src;
-//             int parent = curr.parent;
-            
-//             for(int val : adj.get(src)){
-//                 if(vis[val] == true){
-//                     if(parent != val){
-//                         return true;
-//                     }
-//                 }
-//                 else{
-//                     vis[val] = true;
-//                     q.add(new Pair(val, src));
-//                 }
-//             }
-//         }
-        
-//         return false;
-//     }
-//     // Function to detect cycle in an undirected graph.
-//     public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
-//         // Code here
-//         boolean[] vis = new boolean[V];
-        
-//         Arrays.fill(vis, false);
-        
-//         for(int i = 0;i < V;i++){
-//             if(vis[i] == false){
-//                 if(check(i, vis, adj, V)){
-//                     return true;
-//                 }
-//             }
-//         }
-        
-//         return false;
-//     }
-// }
-
-
-// Using DFS
 
 class Solution {
-    public static boolean dfs(int src, int parent, boolean[] vis, ArrayList<ArrayList<Integer>> adj, int V){
-        vis[src] = true;
+    static class Pair{
+        int node;
+        int src;
         
-        for(int val : adj.get(src)){
-            if(vis[val] == false){
-                if(dfs(val, src, vis, adj, V)) return true;
-            }
-            else if(val != parent){
-                return true;
+        public Pair(int node, int src){
+            this.node = node;
+            this.src = src;
+        }
+    }
+    public static boolean check(int curr, boolean[] vis, ArrayList<ArrayList<Integer>> adj){
+        vis[curr] = true;
+        
+        Queue<Pair> q = new LinkedList<>();
+        q.add(new Pair(curr, -1));
+        
+        while(!q.isEmpty()){
+            Pair p = q.poll();
+            int node = p.node;
+            int src = p.src;
+            
+            for(int connected : adj.get(node)){
+                if(vis[connected]){
+                    if(src != connected){
+                        return true;
+                    }
+                }
+                else{
+                    q.add(new Pair(connected, node));
+                    vis[connected] = true;
+                }
             }
         }
         
         return false;
     }
-    // Function to detect cycle in an undirected graph.
     public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
         // Code here
-        boolean[] vis = new boolean[V];
         
+        // Using BFS
+        boolean[] vis = new boolean[V];
         Arrays.fill(vis, false);
         
         for(int i = 0;i < V;i++){
-            if(vis[i] == false){
-                if(dfs(i, -1, vis, adj, V)) return true;
+            if(!vis[i]){
+                if(check(i, vis, adj)){
+                    return true;
+                }
             }
         }
-        
         return false;
     }
 }
