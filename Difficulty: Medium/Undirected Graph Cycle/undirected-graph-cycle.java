@@ -33,36 +33,69 @@ class GFG {
 
 
 class Solution {
-    static class Pair{
-        int node;
-        int src;
+    // static class Pair{
+    //     int node;
+    //     int src;
         
-        public Pair(int node, int src){
-            this.node = node;
-            this.src = src;
-        }
-    }
-    public static boolean check(int curr, boolean[] vis, ArrayList<ArrayList<Integer>> adj){
-        vis[curr] = true;
+    //     public Pair(int node, int src){
+    //         this.node = node;
+    //         this.src = src;
+    //     }
+    // }
+    // public static boolean check(int curr, boolean[] vis, ArrayList<ArrayList<Integer>> adj){
+    //     vis[curr] = true;
         
-        Queue<Pair> q = new LinkedList<>();
-        q.add(new Pair(curr, -1));
+    //     Queue<Pair> q = new LinkedList<>();
+    //     q.add(new Pair(curr, -1));
         
-        while(!q.isEmpty()){
-            Pair p = q.poll();
-            int node = p.node;
-            int src = p.src;
+    //     while(!q.isEmpty()){
+    //         Pair p = q.poll();
+    //         int node = p.node;
+    //         int src = p.src;
             
-            for(int connected : adj.get(node)){
-                if(vis[connected]){
-                    if(src != connected){
-                        return true;
-                    }
+    //         for(int connected : adj.get(node)){
+    //             if(vis[connected]){
+    //                 if(src != connected){
+    //                     return true;
+    //                 }
+    //             }
+    //             else{
+    //                 q.add(new Pair(connected, node));
+    //                 vis[connected] = true;
+    //             }
+    //         }
+    //     }
+        
+    //     return false;
+    // }
+    // public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
+    //     // Code here
+        
+    //     // Using BFS
+    //     boolean[] vis = new boolean[V];
+    //     Arrays.fill(vis, false);
+        
+    //     for(int i = 0;i < V;i++){
+    //         if(!vis[i]){
+    //             if(check(i, vis, adj)){
+    //                 return true;
+    //             }
+    //         }
+    //     }
+    //     return false;
+    // }
+    
+    public static boolean dfs(int src, int parent, boolean[] vis, ArrayList<ArrayList<Integer>> adj){
+        vis[src] = true;
+        
+        for(int connected : adj.get(src)){
+            if(!vis[connected]){
+                if(dfs(connected, src, vis, adj)){
+                    return true;
                 }
-                else{
-                    q.add(new Pair(connected, node));
-                    vis[connected] = true;
-                }
+            }
+            else if(connected != parent){
+                return true;
             }
         }
         
@@ -70,14 +103,13 @@ class Solution {
     }
     public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
         // Code here
-        
-        // Using BFS
+        // Using DFS
         boolean[] vis = new boolean[V];
         Arrays.fill(vis, false);
         
         for(int i = 0;i < V;i++){
             if(!vis[i]){
-                if(check(i, vis, adj)){
+                if(dfs(i, -1, vis, adj)){
                     return true;
                 }
             }
