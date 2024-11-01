@@ -29,7 +29,7 @@ class Solution{
 
 	public int perfectSum(int arr[],int n, int sum) 
 	{ 
-	    // Your code goes here 
+	    // Your code goes here
 	    int[][] dp = new int[n + 1][sum + 1];
 	    int mod = 1000000007;
 	    
@@ -43,14 +43,13 @@ class Solution{
 	    for(int i = 1;i <= n;i++){
 	        for(int j = 0;j <= sum;j++){
 	            if(arr[i - 1] <= j){
-	                dp[i][j] = (dp[i - 1][j - arr[i - 1]] + dp[i - 1][j] ) % mod;
+	                dp[i][j] = ( dp[i - 1][j] + dp[i - 1][j - arr[i - 1]] ) % mod;
 	            }
 	            else{
-	                dp[i][j] = (dp[i - 1][j] ) % mod;
+	                dp[i][j] = ( dp[i - 1][j] ) % mod;
 	            }
 	        }
 	    }
-	    
 	    return dp[n][sum];
 	} 
 }
