@@ -37,24 +37,26 @@ public class GFG {
 
 
 class Solution {
-    public static int knapsack(int[] val, int[] wt, int n, int W){
-        if(n == 0 || W == 0) return 0;
-        
-        if(wt[n - 1] <= W){
-            int pick = val[n - 1] + knapsack(val, wt, n - 1, W - wt[n - 1]);
-            int not_pick = knapsack(val, wt, n - 1, W);
-            
-            return Math.max(pick, not_pick);
-        }
-        
-        return knapsack(val, wt, n - 1, W);
-    }
     // Function to return max value that can be put in knapsack of capacity.
     static int knapSack(int capacity, int val[], int wt[]) {
         // code here
-        
-        // Using recursion
         int n = val.length;
-        return knapsack(val, wt, n, capacity);
+        
+        if(n <= 0 || capacity <= 0) return 0;
+        int[][] dp = new int[n + 1][capacity + 1];
+        
+        
+        for(int i = 1;i <= n;i++){
+            for(int j = 1;j <= capacity;j++){
+                if(wt[i - 1] <= j){
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - wt[i - 1]] + val[i - 1]);
+                }
+                else{
+                    dp[i][j] = dp[i - 1][j];
+                }
+            }
+        }
+        
+        return dp[n][capacity];
     }
 }
