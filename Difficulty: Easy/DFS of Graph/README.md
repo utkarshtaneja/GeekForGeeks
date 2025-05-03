@@ -1,31 +1,8 @@
-<h2><a href="https://www.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=dfs_of_graph">DFS of Graph</a></h2><h3>Difficulty Level : Difficulty: Easy</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size: 18px;">You are given a connected undirected graph. Perform a Depth First Traversal of the graph.</span><br><span style="font-size: 18px;"><strong>Note: </strong>Use the recursive approach to</span><span style="font-size: 18px;">&nbsp;find the DFS traversal of the graph starting from the 0th vertex from left to right according to the graph.</span></p>
-<p><br><span style="font-size: 18px;"><strong>Example 1:</strong></span></p>
-<pre><span style="font-size: 18px;"><strong>Input: </strong>V = 5 , adj = [[2,3,1] , [0], [0,4], [0], [2]]
-</span><img style="height: 300px; width: 300px;" src="https://media.geeksforgeeks.org/img-practice/graph-1659528381.png" alt=""><span style="font-size: 18px;">
-<strong>Output:</strong> 0 2 4 3 1
-<strong>Explanation</strong>: 
-0 is connected to 2, 3, 1.
-1 is connected to 0.
-2 is connected to 0 and 4.
-3 is connected to 0.
-4 is connected to 2.
-so starting from 0, it will go to 2 then 4,
-and then 3 and 1.
-Thus dfs will be 0 2 4 3 1.</span>
-</pre>
-<p><span style="font-size: 18px;"><strong>Example 2:</strong></span></p>
-<pre><span style="font-size: 18px;"><strong>Input:</strong> V = 4, adj = [[1,3], [2,0], [1], [0]]
-</span><img style="height: 300px; width: 300px;" src="https://media.geeksforgeeks.org/img-practice/graph(1)-1659528893.png" alt=""><span style="font-size: 18px;">
-<strong>Output:</strong> 0 1 2 3
-<strong>Explanation</strong>:
-0 is connected to 1 , 3.
-1 is connected to 0, 2. 
-2 is connected to 1.
-3 is connected to 0. 
-so starting from 0, it will go to 1 then 2
-then back to 0 then 0 to 3
-thus dfs will be 0 1 2 3. </span>
-</pre>
-<p><br><span style="font-size: 18px;"><strong>Your task:</strong><br>You don't need to read input or print anything. Your task is to complete the function&nbsp;<strong>dfsOfGraph()</strong>&nbsp;which takes the integer V denoting the number of vertices and adjacency list as input parameters and returns a list containing the DFS traversal of the graph starting from the 0th vertex from left to right according to the graph.</span></p>
-<p><br><span style="font-size: 18px;"><strong>Expected Time Complexity:&nbsp;</strong>O(V + E)<br><strong>Expected Auxiliary Space:&nbsp;</strong>O(V)</span></p>
-<p><br><span style="font-size: 18px;"><strong>Constraints:</strong><br>1 ≤ V, E ≤ 10<sup>4</sup></span></p></div><p><span style=font-size:18px><strong>Company Tags : </strong><br><code>Accolite</code>&nbsp;<code>Amazon</code>&nbsp;<code>Samsung</code>&nbsp;<code>Intuit</code>&nbsp;<br><p><span style=font-size:18px><strong>Topic Tags : </strong><br><code>DFS</code>&nbsp;<code>Graph</code>&nbsp;<code>Data Structures</code>&nbsp;<code>Algorithms</code>&nbsp;
+<h2><a href="https://www.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1">DFS of Graph</a></h2><h3>Difficulty Level : Difficulty: Easy</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size: 14pt;">Given a <strong>connected undirected graph&nbsp;</strong>containing <strong>V </strong>vertices represented by a 2-d </span><span style="font-size: 18.6667px;">adjacency list&nbsp;</span><strong style="font-size: 18.6667px;"><code>adj[][]</code></strong><span style="font-size: 14pt;">, where each </span><code style="font-size: 14pt;">adj[i]</code><span style="font-size: 14pt;">&nbsp;represents the list of vertices connected to vertex&nbsp;</span><code style="font-size: 14pt;">i</code><span style="font-size: 14pt;">. Perform a </span><strong style="font-size: 14pt;">Depth First Search (DFS)</strong><span style="font-size: 14pt;"> traversal starting from vertex 0, visiting vertices from left to right as per the given adjacency list, and return a list containing the DFS traversal of the graph.</span></p>
+<p><span style="font-size: 14pt;"><strong>Note:</strong> Do traverse in the <strong>same order</strong> as they are in the given <strong>adjacency list</strong>.</span></p>
+<p><span style="font-size: 14pt;"><strong>Examples:</strong></span></p>
+<pre><span style="font-size: 14pt;"><strong>Input: </strong>adj[][] = [[2, 3, 1], [0], [0, 4], [0], [2]]<br><img src="https://media.geeksforgeeks.org/img-practice/prod/addEditProblem/700203/Web/Other/blobid0_1728647807.jpg" width="301" height="189"></span><br><span style="font-size: 14pt;"><strong>Output:</strong> [0, 2, 4, 3, 1]<br><strong style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Explanation</strong><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">: Starting from 0, the DFS traversal proceeds as follows:<br></span>Visit 0 → Output: 0 </span><br><span style="font-size: 14pt;">Visit 2 (the first neighbor of 0) → Output: 0, 2 </span><br><span style="font-size: 14pt;">Visit 4 (the first neighbor of 2) → Output: 0, 2, 4 </span><br><span style="font-size: 14pt;">Backtrack to 2, then backtrack to 0, and visit 3 → Output: 0, 2, 4, 3 </span><br><span style="font-size: 14pt;">Finally, backtrack to 0 and visit 1 → Final Output: 0, 2, 4, 3, 1</span></pre>
+<pre><span style="font-size: 14pt;"><strong>Input:</strong> adj[][] = [[1, 2], [0, 2], [0, 1, 3, 4], [2], [2]]
+<img src="https://media.geeksforgeeks.org/img-practice/prod/addEditProblem/700203/Web/Other/blobid1_1728648013.jpg" width="300" height="189"><br><strong>Output:</strong> [0, 1, 2, 3, 4]
+<strong>Explanation</strong>: Starting from 0, the DFS traversal proceeds as follows: <br>Visit 0 → Output: 0 <br>Visit 1 (the first neighbor of 0) → Output: 0, 1 <br>Visit 2 (the first neighbor of 1) → Output: 0, 1, 2 <br>Visit 3 (the first neighbor of 2) → Output: 0, 1, 2, 3 <br>Backtrack to 2 and visit 4 → Final Output: 0, 1, 2, 3, 4</span></pre>
+<p><span style="font-size: 14pt;"><strong>Constraints:</strong><br>1 ≤ V = adj.size() ≤ 10<sup>4<br></sup>1 ≤ adj[i][j] ≤ 10<sup>4</sup><sup><br></sup></span></p></div><p><span style=font-size:18px><strong>Company Tags : </strong><br><code>Accolite</code>&nbsp;<code>Amazon</code>&nbsp;<code>Samsung</code>&nbsp;<code>Intuit</code>&nbsp;<br><p><span style=font-size:18px><strong>Topic Tags : </strong><br><code>DFS</code>&nbsp;<code>Graph</code>&nbsp;<code>Data Structures</code>&nbsp;<code>Algorithms</code>&nbsp;
